@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { FlatList } from 'react-native';
 import { CardHorizontalFood } from './food'
+import env from '../../services/env/env';
+import BlinkingText from '../BlinkingText';
 
 
 export interface FoodProps{
@@ -16,16 +18,28 @@ export interface FoodProps{
 
 export function TrendingFoods() {
   const [foods, setFoods] = useState<FoodProps[]>([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     async function getFoods(){
-      const response = await fetch("https://api-food-8mof.onrender.com/foods")
-      const data = await response.json()
-      setFoods(data.foods);
+      try {
+
+        const response = await fetch(`${env()}foods`)
+        const data = await response.json()
+        setFoods(data.foods);
+      } catch(error) {
+        console.error('Error fetching foods:', error);
+      } finally {
+        setLoading(false);
+      }
     }
 
     getFoods();
   }, [])
+
+  if(loading) {
+    return <BlinkingText  />;
+  }
 
  return (
    <FlatList

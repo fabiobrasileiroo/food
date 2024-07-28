@@ -11,14 +11,19 @@ export function CardHorizontalFood({ food }: { food: FoodProps }) {
       className="w-44 h-36 rounded-xl"
     />
     
-    <View className='flex flex-row bg-neutral-900/90 gap-1 rounded-full absolute top-2 right-3 px-2 py-1 items-center justify-center'>
+    <View className='flex flex-row bg-slate-900/85 gap-1 rounded-bl-lg absolute right-0 px-2 py-1 items-center justify-center'>
       <Ionicons name="star" size={14} color="#ca8a04"/>
-      <Text className='text-white text-sm'>{food.rating}</Text>
+        <Text className='text-slate-100 text-sm'>{food.rating}</Text>
     </View>
 
-    <Text className='text-green-700 font-medium text-lg'>R$ {food.price}</Text>
-    <Text className='text-black mt-1'>{food.name}</Text>
-    <Text className='text-neutral-600 text-sm'>{food.time} - R$ {food.delivery}</Text>
+    <View className='flex flex-row bg-slate-900/85 py-1 px-2 rounded-tl-xl  justify-end absolute bottom-11 right-0'>
+      <Text className='font-medium  text-slate-100'> <Text className='text-green-400'>R$</Text> {food.price}</Text>
+    </View>
+
+    <View className='flex gap-2 flex-row'>
+      <Text className='text-slate-300 mt-1'>{food.name}</Text>
+    </View>
+    <Text className='text-slate-500 text-sm'>{food.time} - R$ {food.delivery}</Text>
    </Pressable>
   );
 }
