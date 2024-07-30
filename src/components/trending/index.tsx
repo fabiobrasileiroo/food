@@ -23,9 +23,10 @@ export function TrendingFoods() {
   useEffect(() => {
     async function getFoods(){
       try {
-
         const response = await fetch(`${env()}foods`)
         const data = await response.json()
+        console.log("🚀 ~ getFoods ~ data:", data.foods)
+        
         setFoods(data.foods);
       } catch(error) {
         console.error('Error fetching foods:', error);
@@ -42,6 +43,7 @@ export function TrendingFoods() {
   }
 
  return (
+  
    <FlatList
       data={foods}
       renderItem={ ({ item }) => <CardHorizontalFood food={item} /> }
